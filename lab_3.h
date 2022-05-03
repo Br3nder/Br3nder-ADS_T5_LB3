@@ -15,8 +15,8 @@ struct adjacency_matrix{
     friend std::ostream& operator<<(std::ostream& out, adjacency_matrix& m){
         if(m.cities){
             out << "cities: " << *m.cities << std::endl << "matrix:\n";
-            for(int i = 0; i < 7; i++){
-                for(int j = 0; j < 7; j++) {
+            for(int i = 0; i < m.cities->size(); i++){
+                for(int j = 0; j < m.cities->size(); j++) {
                     if (m.matrix[i][j] == INF)
                         out << "inf ";
                     else
@@ -119,10 +119,10 @@ void make_adjacency_matrix(std::ifstream& file, adjacency_matrix& adj_matrix){
 
 void ford_focus(adjacency_matrix& adj_matrix){
     int from, to, weight;
-    for(int i = 0; i < 7; i++){
-        for(int j = 0; j < 7; j++){
+    for(int i = 0; i < adj_matrix.cities->size(); i++){
+        for(int j = 0; j < adj_matrix.cities->size(); j++){
             if(i == j) continue;
-            for(int k = 0; k < 7; k++){
+            for(int k = 0; k < adj_matrix.cities->size(); k++){
                 if(j==k) continue;
                 if(adj_matrix.matrix[i][j] > adj_matrix.matrix[i][k] + adj_matrix.matrix[k][j])
                     adj_matrix.matrix[i][j] = adj_matrix.matrix[i][k] + adj_matrix.matrix[k][j];
@@ -130,8 +130,8 @@ void ford_focus(adjacency_matrix& adj_matrix){
         }
     }
 
-    for(int i = 0; i < 7; i++) {
-        for (int j = 0; j < 7; j++){
+    for(int i = 0; i < adj_matrix.cities->size(); i++) {
+        for (int j = 0; j < adj_matrix.cities->size(); j++){
             if(adj_matrix.matrix[i][j] == INF)
                 std::cout << "inf ";
             else
