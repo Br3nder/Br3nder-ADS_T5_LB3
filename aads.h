@@ -412,7 +412,7 @@ namespace br3nder {
 
     template<class T>
     pair<List<T>, List<T>> List<T>::split(int position) {
-        if (m_size == 2 && position == 0) { //TODO кастыль: не работает разделение списка с двумя элементами
+        if (m_size == 2 && position == 0) {
             List<T> list1, list2;
             list1.push_back(m_head->data);
             list2.push_back(m_tail->data);
@@ -449,7 +449,7 @@ namespace br3nder {
         return false;
     }
 
-    //TODO не менять значения в указателе
+    
     template<class T>
     T *List<T>::get() {
         return &m_head->data;
